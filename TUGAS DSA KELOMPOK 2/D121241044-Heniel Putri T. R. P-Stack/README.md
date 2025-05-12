@@ -21,8 +21,8 @@ Langkah-langkah:
    - Lakukan perulangan sebanyak q kali:
      Ambil bilangan prima sesuai iterasi
      Pisahkan piring di tumpukan A:
-       - Jika nomor piring habis dibagi bilangan prima → masukkan ke B
-       - Jika tidak → masukkan ke A baru
+        - Jika nomor piring habis dibagi bilangan prima → masukkan ke B
+        - Jika tidak → masukkan ke A baru
      Pindahkan isi B ke jawaban (dari atas ke bawah)
      A untuk iterasi berikutnya adalah A baru
 3. Tambahkan Sisa Piring  
