@@ -56,16 +56,16 @@ Untuk setiap query jenis ke-3 (`3`), cetak elemen paling depan dari queue.
 ### Penjelasan Eksekusi
 
 <pre>
-`1 42`: Enqueue 42 → Queue: {42}
-`2`   : Dequeue 42 → Queue: {}
-`1 14`: Enqueue 14 → Queue: {14}
-`3`   : Cetak 14
-`1 28`: Enqueue 28 → Queue: {14, 28}
-`3`   : Cetak 14
-`1 60`:Queue jadi {14, 28, 60}
-`1 78`: Queue jadi {14, 28, 60, 78}
-`2`   : Dequeue 14 → Queue: {28, 60, 78}
-`2`   : Dequeue 28 → Queue: {60, 78}
+1 42 : Enqueue 42 → Queue: {42}
+2    : Dequeue 42 → Queue: {}
+1 14 : Enqueue 14 → Queue: {14}
+3    : Cetak 14
+1 28 : Enqueue 28 → Queue: {14, 28}
+3    : Cetak 14
+1 60 :Queue jadi {14, 28, 60}
+1 78 : Queue jadi {14, 28, 60, 78}
+2    : Dequeue 14 → Queue: {28, 60, 78}
+2    : Dequeue 28 → Queue: {60, 78}
 </pre>
 
 ## Analisis dan Pendekatan Solusi
@@ -82,7 +82,7 @@ Untuk membangun `struktur data queue (FIFO)` menggunakan dua buah `stack (LIFO)`
 2. **Dequeue (`2`)** <br>
    Menghapus elemen pertama dari `stack2`.
 3. **Peek (`3`)** <br>
-   Mencetak elemen pertama dari `stack2`tanpa menghapusnya.
+   Mencetak elemen pertama dari `stack2` tanpa menghapusnya.
 
 #### Pemindahan data `stack1` ke `stack2`
 
