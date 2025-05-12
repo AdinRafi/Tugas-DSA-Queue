@@ -12,8 +12,8 @@
 Untuk menghitung `height` dari sebuah `tree`, kita menggunakan `fungsi rekursif`. Kita juga menggunakan `class` agar program lebih fleksibel.
 
 1. `Class Node` digunakan untuk menyimpan data yang akan diinput. `Class Solution` digunakan untuk menginput data menggunakan fungsi insert(), dan menghitung tinggi menggunakan fungsi height().
-2. Tree dibagi menjadi kiri dan kanan, dan merekursif untuk mendapatkan nilainya.
-3. Apabila `Node = NULL`, maka nilai akan dikembalikan pada `-1`.
+2. Tree dibagi menjadi kiri dan kanan, dan merekursif keduanya untuk mendapatkan nilai tingginya.
+3. Apabila `Node = NULL`, maka nilai akan dikembalikan pada `-1`. `(Node = 0, Edge dianggap -1)`.
 
 Jika Node tidak ada `(NULL)` maka tinggi di `return -1`, karena kita menghitung tinggi berdasarkan `edge(sisi)`.
 
