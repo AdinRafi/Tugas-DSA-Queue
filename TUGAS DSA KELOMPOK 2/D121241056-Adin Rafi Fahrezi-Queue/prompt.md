@@ -78,7 +78,7 @@ Untuk membangun `struktur data queue (FIFO)` menggunakan dua buah `stack (LIFO)`
 ### Strategi Kerja
 
 1. **Enqueue (`1 x`)** <br>
-   return Tambahkan elemen `x` ke `stack1`.
+   Tambahkan elemen `x` ke `stack1`.
 2. **Dequeue (`2`)** <br>
    Menghapus elemen pertama dari `stack2`.
 3. **Peek (`3`)** <br>
