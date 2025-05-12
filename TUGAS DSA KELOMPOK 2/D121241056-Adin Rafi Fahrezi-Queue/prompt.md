@@ -37,7 +37,7 @@ Untuk setiap query jenis ke-3 (`3`), cetak elemen paling depan dari queue.
 | 10        | q = 10 (number of queries) |
 | 1 42      | 1st query, enqueue 42      |
 | 2         | dequeue front element      |
-| 1 14      | enqueue 42                 |
+| 1 14      | enqueue 14                 |
 | 3         | print the front element    |
 | 1 28      | enqueue 28                 |
 | 3         | print the front element    |
