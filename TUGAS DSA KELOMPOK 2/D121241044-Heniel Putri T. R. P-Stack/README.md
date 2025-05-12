@@ -30,7 +30,5 @@ Langkah-langkah:
 
 ### Yang Perlu Diperhatikan:
 - Urutan piring saat dipindahkan harus dari atas (elemen terakhir array)
-- Di bahasa C perlu hati-hati mengelola memori
-Kompleksitas:
 - Waktu: O(q × n) karena setiap iterasi memproses semua piring
 - Ruang: O(n) untuk menyimpan hasil
