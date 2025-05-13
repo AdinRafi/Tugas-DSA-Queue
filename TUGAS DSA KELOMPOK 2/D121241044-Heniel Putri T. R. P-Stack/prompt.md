@@ -32,9 +32,11 @@ Contoh:
 7  
 5  
 ### Batasan (Constraints):
-- 1 ≤ n, q ≤ 10^5
+- 1 ≤ n ≤ 5 x 10<sup>4</sup>
 
-- 1 ≤ number[i] ≤ 10^4
+- 2 ≤ number[i] ≤ 10<sup>4</sup>
+
+- 1 ≤ q ≤ 1200
 
 ### - Sample Input 0
 
