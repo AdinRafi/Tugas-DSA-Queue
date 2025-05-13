@@ -1,45 +1,62 @@
-# Struktur Data - Graph
+# Struktur Data – Graph
 
-Dalam **struktur data**, **graph (graf)** adalah **struktur data non-linier** yang terdiri dari sekumpulan **simpul (node atau vertex)** dan **sisi (edge)** yang menghubungkan pasangan simpul tersebut. Graph digunakan untuk merepresentasikan hubungan antar objek, dan banyak dipakai di berbagai bidang seperti jaringan komputer, sosial media, pencarian rute, dan lain-lain.
+**Nama:** Adelia Fachrani  
+**NIM:** D121241020  
+**Problem Link:** [HackerRank - Components in a Graph](https://www.hackerrank.com/challenges/components-in-graph/problem)  
+**Difficulty:** Weighted Edges  
 
-### Komponen Utama Graph:
+---
 
-1. **Vertex (simpul)**: Titik-titik dalam graph yang merepresentasikan entitas.
-2. **Edge (sisi)**: Garis yang menghubungkan dua vertex, merepresentasikan relasi antara dua entitas.
+## 📚 Pengantar Graf
 
+Dalam struktur data, **graf (graph)** adalah struktur non-linear yang terdiri dari:
 
-### Jenis-jenis Graph:
+- **Node (Simpul / Vertex):** Elemen atau titik pada graf.
+- **Edge (Sisi / Arc):** Hubungan antara dua simpul.
 
-1. **Graph Berdasarkan Arah:**
+---
 
-   * **Directed Graph (Graf Berarah)**: Sisi memiliki arah (dari satu simpul ke simpul lain).
-   * **Undirected Graph (Graf Tak Berarah)**: Sisi tidak memiliki arah (hubungan dua arah).
+## 🔢 Jenis-Jenis Graf
 
-2. **Graph Berdasarkan Bobot:**
+1. **Graf Tak Berarah (Undirected Graph)**  
+   - Sisi tidak memiliki arah.  
+   - Contoh: hubungan pertemanan di media sosial.
 
-   * **Weighted Graph**: Setiap sisi memiliki nilai bobot (cost, jarak, waktu, dll).
-   * **Unweighted Graph**: Sisi tidak memiliki bobot.
+2. **Graf Berarah (Directed Graph / Digraph)**  
+   - Sisi memiliki arah (panah).  
+   - Contoh: akun yang mengikuti akun lain di Instagram.
 
-3. **Graph Berdasarkan Siklus:**
+3. **Graf Berbobot (Weighted Graph)**  
+   - Setiap sisi memiliki bobot (nilai).  
+   - Contoh: jarak antara dua kota di peta.
 
-   * **Cyclic Graph**: Terdapat satu atau lebih jalur tertutup (siklus).
-   * **Acyclic Graph**: Tidak memiliki siklus.
+4. **Graf Terhubung (Connected Graph)**  
+   - Terdapat jalur antara setiap pasangan simpul (untuk graf tak berarah).  
+   - Untuk graf berarah, disebut *strongly connected* jika ada jalur dua arah antara semua simpul.
 
-4. **Special Graph:**
+5. **Graf Siklik dan Asiklik (Cyclic & Acyclic)**  
+   - **Siklik:** Memiliki siklus (jalur yang kembali ke simpul awal).  
+   - **Asiklik:** Tidak memiliki siklus.  
+   - Contoh: DAG (*Directed Acyclic Graph*) digunakan dalam pemodelan dependensi (misal: compiler, project management).
 
-   * **Tree**: Graph acyclic dan terhubung dengan aturan tertentu.
-   * **DAG (Directed Acyclic Graph)**: Graf berarah yang tidak mengandung siklus.
+---
 
+## 🧮 Representasi Graf
 
-### Representasi Graph:
+1. **Adjacency Matrix**  
+   - Matriks 2D berukuran VxV (V = jumlah simpul).  
+   - `matrix[i][j] = 1` jika ada edge dari simpul *i* ke *j*.
 
-1. **Adjacency Matrix**: Matriks 2D yang menunjukkan hubungan antar simpul.
-2. **Adjacency List**: Daftar simpul yang berisi tetangganya.
+2. **Adjacency List**  
+   - Setiap simpul menyimpan daftar simpul tetangga.  
+   - Lebih efisien untuk graf yang jarang (*sparse graph*).
 
+### Contoh Kode: Adjacency List (Python)
 
-### Contoh Kasus Penggunaan Graph:
-
-* Peta jalan (rute GPS)
-* Jaringan komputer
-* Struktur pertemanan di media sosial
-* Penyusunan jadwal (topological sort)
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A', 'D'],
+    'D': ['B', 'C']
+}
