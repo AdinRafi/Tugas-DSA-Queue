@@ -3,7 +3,7 @@
 <pre>
 <strong>NAMA         :</strong> MUH. YUSUF MA'RUF
 <strong>NIM          :</strong> D121241077
-<strong>Problem Link :</strong> <a href="(https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem)">Delete a Node - HackerRank</a>
+<strong>Problem Link :</strong> <a href="[https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem]">Delete a Node - HackerRank</a>
 <strong>Difficulty   :</strong> Easy
 </pre>
 
