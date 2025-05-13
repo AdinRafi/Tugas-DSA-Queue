@@ -37,14 +37,14 @@ class Solution{ //Untuk menginput data(nilai) dan menghitung tinggi dari sebuah 
             }
         }
 
-    int height(Node* root){
-        if(root == NULL) return -1;
-        return max(height(root->left), height(root->right)) + 1;
-    }
-};
+    int height(Node* root){ //Rekursif untuk menghitung tinggi tree
+        if(root == NULL) return -1; //Jika root tidak ada (NULL), maka edge(sisi) di anggap -1
+        return max(height(root->left), height(root->right)) + 1; //Jika max(-1,-1), di ambil -1 + 1  = 0. 0 ini merupakan tinggi tree
+    }                                                         
+};                                                              
 
 
-int main(){
+int main(){ //Fungsi utama
     Solution myTree;
     Node* root = NULL;
     
@@ -53,14 +53,14 @@ int main(){
 
     cin >> t;
 
-    while(t-- > 0) {
+    for(int i = 0; i < t; i++){
         cin >> data;
-        root = myTree.insert(root, data);
+        root = myTree.insert(root, data)
     }
-  
+    
     int height = myTree.height(root);
     
-  	cout << height;
+  	cout << height; //Mengoutput nilai tinggi tree (hasil akhir)
 
     return 0;
 }
