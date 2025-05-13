@@ -3,7 +3,7 @@ using namespace std;
 
 // Tree = Konsep Struktur Data yang terdiri atas nodes(simpul) atau daun(leaf) dan akar(root)
 // Bersifat Hierarki
-// Height = Jumlah sisi dari root sampai leaf yang terjauh.
+// treeHeight = Jumlah sisi dari root sampai leaf yang terjauh.
 
 //Program ini hanya memerlukan Operasi Menghitung Tinggi Sebuah Tree
 
@@ -37,14 +37,14 @@ class Solution{ //Untuk menginput data(nilai) dan menghitung tinggi dari sebuah 
             }
         }
 
-    int height(Node* root){ //Rekursif untuk menghitung tinggi tree
+    int treeHeight(Node* root){ //Rekursif untuk menghitung tinggi tree
         if(root == NULL) return -1; //Jika root tidak ada (NULL), maka edge(sisi) di anggap -1
-        return max(height(root->left), height(root->right)) + 1; //Jika max(-1,-1), di ambil -1 + 1  = 0. 0 ini merupakan tinggi tree
+        return max(treeHeight(root->left), treeHeight(root->right)) + 1; //Jika max(-1,-1), di ambil -1 + 1  = 0. 0 ini merupakan tinggi tree
     }                                                         
 };                                                              
 
 
-int main(){ //Fungsi utama
+int main(){
     Solution myTree;
     Node* root = NULL;
     
@@ -55,12 +55,12 @@ int main(){ //Fungsi utama
 
     for(int i = 0; i < t; i++){
         cin >> data;
-        root = myTree.insert(root, data)
+        root = myTree.insert(root, data);
     }
     
-    int height = myTree.height(root);
+    int treeHeight = myTree.treeHeight(root);
     
-  	cout << height; //Mengoutput nilai tinggi tree (hasil akhir)
+  	cout << treeHeight;
 
     return 0;
 }
