@@ -1,5 +1,6 @@
 # AI Prompt dan Analisis
 
+
 ## Prompt (Sumber Soal)
 
 Buat implementasi struktur data queue (antrian) dengan hanya menggunakan dua buah stack. Queue mengikuti prinsip FIFO (First In First Out), berbeda dengan stack yang menggunakan LIFO (Last In First Out).
