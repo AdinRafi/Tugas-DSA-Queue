@@ -59,21 +59,21 @@ Contoh:
 
 - Pindahkan piring dari A:
 
-    - 5 % 2 ≠ 0 → tetap di A (sekarang A = [3, 4, 7, 6]).
+    - 5 % 2 ≠ 0 → pindah ke A₁ = [5].
 
-    - 6 % 2 = 0 → pindah ke B = [6].
+    - 6 % 2 = 0 → pindah ke B₁ = [6].
 
-    - 7 % 2 ≠ 0 → tetap di A = [3, 4].
+    - 7 % 2 ≠ 0 → pindah ke A₁ = [5, 7].
 
-    - 4 % 2 = 0 → pindah ke B = [6, 4].
+    - 4 % 2 = 0 → pindah ke B₁ = [6, 4].
 
-    - 3 % 2 ≠ 0 → tetap di A = [].
+    - 3 % 2 ≠ 0 → pindah ke A₁ = [5, 7, 3].
 
 - Pindahkan isi B ke answers = [4, 6] (karena B adalah stack, atas ke bawah = 4 lalu 6).
-
-3. Sisa A: Kosong.
-
-4. Hasil Akhir: Gabungkan answers + sisa A = [4, 6, 3, 7, 5].
+  
+- Pindahkan isi A₁ ke answers = [3, 7, 5]
+      (karena A₁ juga stack, atas ke bawah = 3 lalu 7 lalu 5).
+ 3. Hasil Akhir: answers = [4, 6, 3, 7, 5].
 
 ### - Sample Input 1
 
@@ -89,39 +89,42 @@ Contoh:
 3  
 
 ### Penjelasan Eksekusi
-1. Tumpukan Awal (A): [3, 3, 4, 4, 9] (9 di puncak).
+1. Tumpukan Awal (A): [3, 3, 4, 4, 9] (9 di puncak)
 2. Iterasi 1 (Prima = 2):
    
-   Proses:
-    - Ambil 9 dari A → 9 % 2 ≠ 0 → tetap di A = [3, 3, 4, 4].
-    - Ambil 4 → 4 % 2 = 0 → pindah ke B = [4].
-    - Ambil 4 → 4 % 2 = 0 → pindah ke B = [4, 4].
-    - Ambil 3 → 3 % 2 ≠ 0 → tetap di A = [3, 3].
-    - Ambil 3 → 3 % 2 ≠ 0 → tetap di A = [3, 3].
-      
-    Hasil Sementara:
-    - B = [4, 4] → tambahkan ke answers = [4, 4] (urutan top-to-bottom).
-    - A baru = [3, 3, 9] (karena 9 sebelumnya tidak diproses).
-3. Iterasi 2 (Prima = 3)
+- Pindahkan piring dari A:
+
+    - 9 % 2 ≠ 0 → A₁ = [9]
+
+    - 4 % 2 = 0 → B₁ = [4]
+
+    - 4 % 2 = 0 → B₁ = [4, 4]
+
+    - 3 % 2 ≠ 0 → A₁ = [9, 3]
+
+    - 3 % 2 ≠ 0 → A₁ = [9, 3, 3]
+
+- Pindahkan isi B₁ ke answers = [4, 4]
+(karena B₁ adalah stack, atas ke bawah = 4 lalu 4)
+
+3. Iterasi 2 (Prima = 3):
    
-   Proses:
-    - Ambil 9 dari A → 9 % 3 = 0 → pindah ke B = [9].
-    - Ambil 3 → 3 % 3 = 0 → pindah ke B = [9, 3].
-    - Ambil 3 → 3 % 3 = 0 → pindah ke B = [9, 3, 3].
-      
-   Hasil Sementara:
-    - B = [9, 3, 3] → tambahkan ke answers = [4, 4, 9, 3, 3].
-    - A baru = [] (kosong).
+- Pindahkan piring dari A₁:
 
-  4. Finalisasi
-     Tidak ada sisa di A, jadi answers sudah lengkap.
+    - 3 % 3 = 0 → B₂ = [3]
 
-### Urutan Hasil Akhir
-1. answers dari Iterasi 1: [4, 4].
+    - 3 % 3 = 0 → B₂ = [3, 3]
 
-2. answers dari Iterasi 2: [9, 3, 3].
+    - 9 % 3 = 0 → B₂ = [3, 3, 9]
+      A₂ kosong.
 
-3. Gabungan: [4, 4, 9, 3, 3].
+- Pindahkan isi B₂ ke answers = [4, 4, 9, 3, 3]
+(karena B₂ adalah stack, atas ke bawah = 9, 3, 3)
+
+- Tidak ada nilai tersisa di A₂.
+  
+4. Hasil Akhir: [4, 4, 9, 3, 3]
+
 
 ## Penjelasan Solusi
 
