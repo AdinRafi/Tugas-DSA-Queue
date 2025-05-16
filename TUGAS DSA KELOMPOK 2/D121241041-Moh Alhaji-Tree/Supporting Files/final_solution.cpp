@@ -12,8 +12,8 @@ class Node{ //Untuk meyimpan data(nilai) untuk digunakan dalam Tree
         int data;
         Node *left;
         Node *right;
-        Node(int d){ //Ketika nilai dimasukkan, d akan menjadi root pertama, dan anakannya (left dan right) akan menjadi NULL atau kosong
-            data = d;
+        Node(int d){ //Ketika nilai dimasukkan, d akan menjadi root pertama,
+            data = d; //dan anakannya (left dan right) akan menjadi NULL atau kosong
             left = NULL;
             right = NULL;
         }
@@ -39,8 +39,8 @@ class Solution{ //Untuk menginput data(nilai) dan menghitung tinggi dari sebuah 
 
     int treeHeight(Node* root){ //Rekursif untuk menghitung tinggi tree
         if(root == NULL) return -1; //Jika root tidak ada (NULL), maka edge(sisi) di anggap -1
-        return max(treeHeight(root->left), treeHeight(root->right)) + 1; //Jika max(-1,-1), di ambil -1 + 1  = 0. 0 ini merupakan tinggi tree
-    }                                                         
+        return max(treeHeight(root->left), treeHeight(root->right)) + 1;
+    }   //Jika max(-1,-1), di ambil -1 + 1  = 0. 0 ini merupakan tinggi tree
 };                                                              
 
 
