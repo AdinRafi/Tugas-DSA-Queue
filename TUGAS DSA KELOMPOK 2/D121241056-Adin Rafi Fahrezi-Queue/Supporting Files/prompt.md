@@ -14,7 +14,7 @@ Chat Link: <a href="https://chatgpt.com/share/6830478d-2684-8010-8ccf-6d613a7624
 
 Diberikan sebuah urutan bilangan bulat sebanyak`n`, yaitu `A =  {a₀, a₁, ..., aₙ₋₁}`. Kita akan melakukan kueri menggunakan sebuah bilangan bulat, `d`, untuk menghitung hasil dari ekspresi berikut:
 
-<p align="middle"><span style="font-size: 20px; font-weight: bold;">min (max a<sub>j</sub>)</span></p>
+<p align="middle"><span style="font-size: 24px; font-weight: bold;">min (max a<sub>j</sub>)</span></p>
 
 <p align="middle">Dengan ketentuan: 0 ≤ i ≤ n-d, i ≤ j < i + d</p>
 
@@ -134,7 +134,7 @@ Untuk setiap `d`, kita diminta:
 |       [33, 11, 44]        |        44         |                   |
 |       [11, 44, 11]        |        44         |                   |
 |       [44, 11, 55]        |        55         |                   |
-|                           |                   |       `44 `       |
+|                           |                   |       `44`       |
 
 ### Strategi Solusi
 
