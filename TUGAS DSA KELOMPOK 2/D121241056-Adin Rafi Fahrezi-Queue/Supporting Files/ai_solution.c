@@ -1,102 +1,51 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#define MAX 100000
+#define MAXN 100005
 
-// Struktur stack
-typedef struct Stack
+int arr[MAXN], maxWindow[MAXN], deque[MAXN];
+int front, back;
+
+// Fungsi untuk menghitung nilai minimum dari maksimum subarray sepanjang d
+int minOfMax(int arr[], int n, int d)
 {
-    int top;
-    long long data[MAX];
-} Stack;
+    front = back = 0;
+    int result = 1e9 + 7; // nilai sangat besar sebagai nilai awal minimum
 
-void init(Stack *s)
-{
-    s->top = -1;
-}
-
-int isEmpty(Stack *s)
-{
-    return s->top == -1;
-}
-
-void push(Stack *s, long long value)
-{
-    s->data[++(s->top)] = value;
-}
-
-long long pop(Stack *s)
-{
-    return s->data[(s->top)--];
-}
-
-long long peek(Stack *s)
-{
-    return s->data[s->top];
-}
-
-Stack s1, s2;
-
-void shiftStacks()
-{
-    if (isEmpty(&s2))
+    for (int i = 0; i < n; i++)
     {
-        while (!isEmpty(&s1))
-        {
-            push(&s2, pop(&s1));
-        }
-    }
-}
+        // Hapus elemen dari belakang yang lebih kecil dari elemen sekarang
+        while (back > front && arr[i] >= arr[deque[back - 1]])
+            back--;
 
-void enqueue(long long x)
-{
-    push(&s1, x);
-}
+        deque[back++] = i;
 
-void dequeue()
-{
-    shiftStacks();
-    if (!isEmpty(&s2))
-    {
-        pop(&s2);
-    }
-}
+        // Hapus elemen dari depan jika di luar jendela
+        if (deque[front] <= i - d)
+            front++;
 
-void printFront()
-{
-    shiftStacks();
-    if (!isEmpty(&s2))
-    {
-        printf("%lld\n", peek(&s2));
+        // Setelah jendela pertama terbentuk
+        if (i >= d - 1)
+            if (arr[deque[front]] < result)
+                result = arr[deque[front]];
     }
+
+    return result;
 }
 
 int main()
 {
-    init(&s1);
-    init(&s2);
+    int n, q;
+    scanf("%d %d", &n, &q);
 
-    int q;
-    scanf("%d", &q);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
 
     for (int i = 0; i < q; i++)
     {
-        int type;
-        scanf("%d", &type);
-
-        if (type == 1)
-        {
-            long long x;
-            scanf("%lld", &x);
-            enqueue(x);
-        }
-        else if (type == 2)
-        {
-            dequeue();
-        }
-        else if (type == 3)
-        {
-            printFront();
-        }
+        int d;
+        scanf("%d", &d);
+        printf("%d\n", minOfMax(arr, n, d));
     }
 
     return 0;

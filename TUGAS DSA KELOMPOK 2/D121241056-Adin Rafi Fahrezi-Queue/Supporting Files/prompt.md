@@ -2,107 +2,205 @@
 
 ## Prompt (Sumber Soal)
 
-Buat implementasi struktur data queue (antrian) dengan hanya menggunakan dua buah stack. Queue mengikuti prinsip FIFO (First In First Out), berbeda dengan stack yang menggunakan LIFO (Last In First Out).
+Chat Link: <a href="https://chatgpt.com/share/6830478d-2684-8010-8ccf-6d613a7624a5">GPT-4o</a>
 
-## Penjelasan Soal
+<img src="pictForPrompt/Q1.png" alt="Image" width="300"/> <img src="pictForPrompt/Q2.png" alt="Image" width="300"/> 
 
-Program menerima sejumlah `q` query dari input standar. Setiap query bisa berupa:
+<img src="pictForPrompt/Q3.png" alt="Image" width="300"/> <img src="pictForPrompt/Q4.png" alt="Image" width="300"/>
 
-1. `1 x` → Enqueue nilai `x` ke dalam queue.
-2. `2` → Dequeue (hapus) elemen dari depan queue.
-3. `3` → Cetak elemen paling depan dari queue (tanpa menghapusnya).
+`Berikan Analisis dan kode C nya`
 
-### Format Masukan:
+## Arti Soal
 
-- Baris pertama berisi satu bilangan bulat yang menyatakan jumlah query.
-- Setiap baris berikutnya adalah sebuah query.
-- Semua query diawali dengan sebuah bilangan bulat yang menunjukkan jenis query.
-- Hanya query tipe 1 yang diikuti oleh satu nilai tambahan untuk dimasukkan ke antrean.
+Diberikan sebuah urutan bilangan bulat sebanyak`n`, yaitu `A =  {a₀, a₁, ..., aₙ₋₁}`. Kita akan melakukan kueri menggunakan sebuah bilangan bulat, `d`, untuk menghitung hasil dari ekspresi berikut:
 
-### Format Keluaran:
+<p align="middle"><span style="font-size: 20px; font-weight: bold;">min (max a<sub>j</sub>)</span></p>
 
-Untuk setiap query jenis ke-3 (`3`), cetak elemen paling depan dari queue.
+<p align="middle">Dengan ketentuan: 0 ≤ i ≤ n-d, i ≤ j < i + d</p>
 
-### Batasan (Constraints):
+Dengan kata lain, jika kita definisikan:
 
-1. `1 ≤ q ≤ 10⁵:` Banyaknya operasi bisa sangat besar, jadi efisiensi waktu sangat penting.
-2. `1 ≤ type ≤ 3:` Tipe query pasti valid.
-3. `1 ≤ |x| ≤ 10⁹:` Nilai elemen bisa sangat besar, jadi gunakan tipe data seperti `long` di C.
-4. Diberikan bahwa setiap query jenis `3` akan selalu valid (tidak pernah memanggil cetak dari queue kosong).
+`mᵢ = max(aᵢ, aᵢ₊₁, aᵢ₊₂, ..., aᵢ₊d₋₁)`.
 
-### Sample Input
+Maka yang harus dihitung adalah:
 
-| **STDIN** | **Function**               |
-| --------- | -------------------------- |
-| 10        | q = 10 (number of queries) |
-| 1 42      | 1st query, enqueue 42      |
-| 2         | dequeue front element      |
-| 1 14      | enqueue 14                 |
-| 3         | print the front element    |
-| 1 28      | enqueue 28                 |
-| 3         | print the front element    |
-| 1 60      | enqueue 60                 |
-| 1 78      | enqueue 78                 |
-| 2         | dequeue front element      |
-| 2         | dequeue front element      |
+`min(m₀, m₁, ..., mₙ₋d)`.
 
-### Sample Output
+Diberikan array `arr` dan `q` buah kueri, kembalikan sebuah list berisi jawaban dari masing-masing kueri.
+
+### Contoh
+
+`arr = [2, 3, 4, 5, 6]`
+`queries = [2, 3]`
+
+Kueri pertama menggunakan semua subarray dengan panjang `2`:
+
+`[2, 3], [3, 4], [4, 5] [5, 6]`. Maksimum dari tiap subarray adalah `[3, 4, 5, 6]` dan nilai minimum dari itu adalah `3`.
+
+TKueri kedua menggunakan subarray dengan panjang `3`:
+
+`[2, 3, 4], [3, 4, 5], [4, 5, 6]`. Maksimum dari tiap subarray adalah `[4, 5, 6]` dan nilai minimum dari itu adalah `4`.
+
+Hasil: `[3, 4]`.
+
+### Deskripsi Fungsi
+
+Lengkapilah fungsi `solve` seperti berikut:
+
+`solve punya parameter(s) yang berisi:`
+
+- `int arr[n]: an array of integers`
+- `int queries[q]: the lengths of subarrays to`
+
+Dan mengembalikan:
+
+`int[q]: the answers to each query`
+
+### Format Masukan
+
+1. `Baris pertama: dua bilangan bulat, `n`dan`q`
+2. Baris kedua: `n` bilangan bulat, yaitu isi dari `arr`.
+3. `q` baris berikutnya: masing-masing berisi satu bilangan bulat `d` untuk kueri.
+
+### Batasan
+
+- 1 ≤ n ≤ 10⁵
+- 0 ≤ arr[i] ≤ 10⁶
+- 1 ≤ q ≤ 100
+- 1 ≤ d ≤ n
+
+### Contoh Masukan 0
+
+| **STDIN**      | **Meaning**                                 |
+| -------------- | ------------------------------------------- |
+| 5 5            | n = 5 (jumlah elemen), q = 5 (jumlah kueri) |
+| 33 11 44 11 55 | elemen-elemen dari `arr`                    |
+| 1              | Nilai kueri pertama (`d = 1`)               |
+| 2              | Nilai kueri kedua (`d = 2`)                 |
+| 3              | Nilai kueri ketiga(`d = 3`)                 |
+| 4              | Nilai kueri keempat (`d = 4`)               |
+| 5              | Nilai kueri kelima (`d = 5`)                |
+
+### Contoh Keluaran 0
 
 | **STDOUT** |
-| ---------- |
-| 14         |
-| 14         |
+| :--------: |
+|     11     |
+|     33     |
+|     44     |
+|     44     |
+|     55     |
 
-### Penjelasan Eksekusi
+### Penjelasan 0
 
-<pre>
-1 42 : Enqueue 42 → Queue: {42}
-2    : Dequeue 42 → Queue: {}
-1 14 : Enqueue 14 → Queue: {14}
-3    : Cetak 14
-1 28 : Enqueue 28 → Queue: {14, 28}
-3    : Cetak 14
-1 60 :Queue jadi {14, 28, 60}
-1 78 : Queue jadi {14, 28, 60, 78}
-2    : Dequeue 14 → Queue: {28, 60, 78}
-2    : Dequeue 28 → Queue: {60, 78}
-</pre>
+Untuk `d = 1`, nilainya adalah
+min(max(a<sub>0</sub>), max(a<sub>1</sub>), max(a<sub>2</sub>), max(a<sub>3</sub>), max(a<sub>4</sub>)) = 11.
 
-## Analisis dan Pendekatan Solusi
+Untuk `d = 2`, nilainya adalah
+min(max(a<sub>0</sub>, a<sub>1</sub>), max(a<sub>1</sub>, a<sub>2</sub>), max(a<sub>2</sub>, a<sub>3</sub>), max(a<sub>3</sub>, a<sub>4</sub>)) = 33.
 
-Untuk membangun `struktur data queue (FIFO)` menggunakan dua buah `stack (LIFO)`, digunakan pendekatan berikut:
+Untuk `d = 3`, nilainya adalah
+min(max(a<sub>0</sub>, a<sub>1</sub>, a<sub>2</sub>), max(a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>), max(a<sub>2</sub>, a<sub>3</sub>, a<sub>4</sub>)) = 44.
 
-1. `stack1`: untuk menyimpan elemen yang masuk (`enqueue`)
-2. `stack2`: untuk mengeluarkan atau melihat elemen depan (`dequeue` dan `peek`)
+Untuk `d = 4`, nilainya adalah
+min(max(a<sub>0</sub>, a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>), max(a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, a<sub>4</sub>)) = 44.
 
-### Strategi Kerja
+Untuk `d = 5`, nilainya adalah
+min(max(a<sub>0</sub>, a<sub>1</sub>, a<sub>2</sub>, a<sub>3</sub>, a<sub>4</sub>)) = 55.
 
-1. **Enqueue (`1 x`)** <br>
-   Tambahkan elemen `x` ke `stack1`.
-2. **Dequeue (`2`)** <br>
-   Menghapus elemen pertama dari `stack2`.
-3. **Peek (`3`)** <br>
-   Mencetak elemen pertama dari `stack2` tanpa menghapusnya.
+## Analisis Masalah:
 
-#### Pemindahan data `stack1` ke `stack2`
+Diberikan:
 
-- Jika `stack2` **tidak kosong**, ambil elemen dari `stack2`.
-- Jika `stack2` **kosong**, pindahkan semua elemen dari `stack1` ke `stack2`.
-<p align="left">Proses ini membalik urutan dan menempatkan elemen yang paling lama masuk di atas `stack2`.</p>
+- Sebuah array `arr` berisi `n` bilangan bulat.
 
-### Kenapa Bisa FIFO?
+- `q` buah query, masing-masing berisi integer `d`.
 
-Meskipun stack bekerja secara LIFO (Last In, First Out), dengan memindahkan elemen dari `stack1` ke `stack2`, urutan elemen menjadi terbalik. Dengan begitu, elemen yang pertama kali masuk (`enqueue`) akan jadi yang pertama keluar (`dequeue`), sesuai prinsip FIFO (First In, First Out).
+Untuk setiap `d`, kita diminta:
 
-### Efisiensi Waktu
+1. Mengambil semua subarray (atau jendela) sepanjang `d` dari array.
 
-- **Enqueue: O(1)** <br>
-  Menambahkan elemen ke `stack1` adalah operasi konstan, karena tidak memerlukan pergeseran elemen lain.
-- **Dequeue / Peek: Amortized O(1)** <br>
-  Meskipun pada saat pemindahan elemen dari stack1 ke stack2 mungkin tampak seperti operasi yang mahal, tetapi `setiap elemen hanya dipindahkan satu kali`. `Ini berarti bahwa total waktu untuk operasi ini adalah amortized O(1)`, meskipun secara individu operasi `dequeue` atau `peek` mungkin memerlukan pemindahan elemen.
+2. Menghitung nilai maksimum dari masing-masing subarray tersebut.
 
-### Keunggulan
+3. Mengambil nilai minimum dari semua maksimum tersebut.
 
-- Tidak perlu memindahkan elemen setiap kali operasi dilakukan (hanya saat pemindahan dari `stack1` ke `stack2`).
-- Cocok untuk jumlah query besar (hingga 100.000 data).
-- Implementasi sederhana dan tidak membutuhkan library tambahan.
+### Contoh
+
+`arr = [33, 11, 44, 11, 55]`
+`query d = 3`
+
+| Subarray dengan panjang 3 | MAX tiap Subarray | MIN dari semuanya |
+| :-----------------------: | :---------------: | :---------------: |
+|       [33, 11, 44]        |        44         |                   |
+|       [11, 44, 11]        |        44         |                   |
+|       [44, 11, 55]        |        55         |                   |
+|                           |                   |       `44 `       |
+
+### Strategi Solusi
+
+Gunakan Sliding Window Maximum untuk menghitung maksimum tiap jendela ukuran d secara efisien dalam waktu O(n) menggunakan deque.
+
+Untuk setiap query d, lakukan:
+
+1. Jalankan Sliding Window Maximum.
+
+2. Ambil nilai minimum dari hasilnya.
+
+Kode dalam Bahasa C
+
+```
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAXN 100005
+
+int arr[MAXN], maxWindow[MAXN], deque[MAXN];
+int front, back;
+
+// Fungsi untuk menghitung nilai minimum dari maksimum subarray sepanjang d
+int minOfMax(int arr[], int n, int d) {
+    front = back = 0;
+    int result = 1e9 + 7; // nilai sangat besar sebagai nilai awal minimum
+
+    for (int i = 0; i < n; i++) {
+        // Hapus elemen dari belakang yang lebih kecil dari elemen sekarang
+        while (back > front && arr[i] >= arr[deque[back - 1]])
+            back--;
+
+        deque[back++] = i;
+
+        // Hapus elemen dari depan jika di luar jendela
+        if (deque[front] <= i - d)
+            front++;
+
+        // Setelah jendela pertama terbentuk
+        if (i >= d - 1)
+            if (arr[deque[front]] < result)
+                result = arr[deque[front]];
+    }
+
+    return result;
+}
+
+int main() {
+    int n, q;
+    scanf("%d %d", &n, &q);
+
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+
+    for (int i = 0; i < q; i++) {
+        int d;
+        scanf("%d", &d);
+        printf("%d\n", minOfMax(arr, n, d));
+    }
+
+    return 0;
+}
+```
+
+### Kompleksitas Waktu
+
+- Setiap query d diselesaikan dalam O(n) menggunakan deque.
+
+- Total kompleksitas: O(q \* n), tapi karena q ≤ 100, ini masih efisien.

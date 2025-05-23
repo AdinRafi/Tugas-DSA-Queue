@@ -1,121 +1,78 @@
 #include <stdio.h>
-#include <stdbool.h>
 
-#define QUERY_CAPACITY 100000 // Menentukan kapasitas maksimum stack
+#define LIMIT 1000001 // Batas Nilai Array + 1
 
-typedef struct
+// Fungsi untuk mengecek isi deque
+int dequeNotEmpty(int front, int back)
 {
-    int top;                        // Index atas stack
-    long long data[QUERY_CAPACITY]; // Array untuk menyimpan data
-} Stack;
-
-// Fungsi untuk menginisialisasi stack (top=-1 berarti stack kosong)
-void init(Stack *s)
-{
-    s->top = -1; // Inisialisasi stack kosong
+    return front <= back; // Mengembalikan true apabila deque tidak kosong dan false jika sebaliknya
 }
 
-// Fungsi untuk mengecek apakah stack kosong
-bool isEmpty(Stack *s)
+// Fungsi untuk mencari nilai minimal dari maximal sub-array deque sesuai panjang k
+int minOfMaxInSubarrays(const int *arr, int n, int k)
 {
-    return s->top == -1; // Jika top == -1 berarti stack kosong
-}
+    int deque[n];             // deque sebagai indeks pada array dengan batas n
+    int front = 0, back = -1; // Inisialisasi front dan back
 
-// Fungsi untuk mengecek apakah stack sudah penuh
-bool isFull(Stack *s)
-{
-    return s->top == QUERY_CAPACITY - 1; // Jika top mencapai kapasitas maksimum, stack penuh
-}
+    int minOfMAX = LIMIT; // Deklarasi minOfMAX dengan nilai LIMIT
 
-// Fungsi untuk memasukkan elemen ke dalam stack
-bool push(Stack *s, long long value)
-{
-    if (isFull(s))
-        return false;            // Cek jika stack penuh, tidak bisa menambah elemen
-    s->data[++(s->top)] = value; // Post-increment: Menambah elemen ke stack dan naikkan indeks top
-    return true;                 // Menyatakan operasi push berhasil
-}
-
-// Fungsi untuk mengeluarkan elemen dari stack
-long long pop(Stack *s)
-{
-    return s->data[(s->top)--]; // Post-decrement: Keluarkan elemen dan turunkan indeks top
-}
-
-// Fungsi untuk melihat elemen paling atas stack tanpa mengeluarkannya
-long long peek(Stack *s)
-{
-    return s->data[s->top]; // Tidak ada perubahan pada stack, hanya mengakses elemen atas
-}
-
-Stack s1, s2; // Dua stack untuk queue
-
-// Memindahkan elemen dari s1 ke s2 jika s2 kosong
-void shiftStacks()
-{
-    if (isEmpty(&s2))
-    { // Jika stack s2 kosong
-        // Pindahkan semua elemen dari s1 ke s2
-        while (!isEmpty(&s1))
+    for (int i = 0; i < n; i++) // Loop untuk menentukan nilai minimal dari maximal sub-array deque
+    {
+        if (dequeNotEmpty(front, back) && deque[front] <= i - k) // Memajukan indeks apabila sudah memenuhi kueri(k) / keluar dari window
         {
-            push(&s2, pop(&s1)); // Pindahkan elemen satu per satu dari s1 ke s2
+            front++;
+        }
+
+        while (dequeNotEmpty(front, back) && arr[i] >= arr[deque[back]]) // Menghapus elemen yang lebih kecil dari array[i] dari belakang
+        {
+            back--;
+        }
+
+        deque[++back] = i; // Menambahkan nilai indeks pada deque
+
+        if (i >= k - 1) // Menaruh nilai minimal apabila currentMAX kurang dari minOfMAX
+        {
+            int currentMAX = arr[deque[front]];
+            if (minOfMAX > currentMAX)
+                minOfMAX = currentMAX;
         }
     }
+
+    return minOfMAX; // Mengembalikan nilai minimal dari maximal sub-array deque
 }
 
-// Fungsi untuk menambahkan elemen ke dalam antrian (enqueue)
-void enqueue(long long x)
+void solve(int *arr, int *query, int *result, int n, int q)
 {
-    push(&s1, x); // Masukkan elemen ke s1 (stack pertama)
-}
-
-// Fungsi untuk menghapus elemen dari depan antrian (dequeue)
-void dequeue()
-{
-    shiftStacks(); // Pindahkan elemen dari s1 ke s2 jika perlu
-    if (!isEmpty(&s2))
+    for (int i = 0; i < q; i++)
     {
-        pop(&s2); // Hapus elemen paling atas dari s2 (elemen pertama yang masuk)
-    }
-}
-
-// Fungsi untuk mencetak elemen paling depan antrian tanpa menghapusnya (peek front)
-void printFront()
-{
-    shiftStacks(); // Pindahkan elemen dari s1 ke s2 jika perlu
-    if (!isEmpty(&s2))
-    {
-        printf("%lld\n", peek(&s2)); // Tampilkan elemen paling depan tanpa menghapusnya
+        result[i] = minOfMaxInSubarrays(arr, n, query[i]); // Mengisi nilai result pada indeks i sesuai hasil fungsi minOfMaxInSubarrays
     }
 }
 
 int main()
 {
-    init(&s1); // Inisialisasi stack s1
-    init(&s2); // Inisialisasi stack s2
+    int n, q;               // Inisialisasi n dan q
+    scanf("%d %d", &n, &q); // Mengisi nilai n dan q sesuai input
 
-    int q;
-    scanf("%d", &q); // Input jumlah query
+    int arr[n];    // Array sebagai elemen dengan batas n
+    int query[q];  // Kueri sebagai tempat menyimpan kueri(k) dengan batas n
+    int result[q]; // Result sebagai tempat menyimpan hasil dengan batas n
+
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]); // Mengisi nilai array pada indeks i sesuai input
+    }
 
     for (int i = 0; i < q; i++)
     {
-        int type;
-        scanf("%d", &type); // Input tipe query
+        scanf("%d", &query[i]); // Mengisi nilai query pada indeks i sesuai input
+    }
 
-        if (type == 1)
-        { // Enqueue: masukkan elemen ke antrian
-            long long x;
-            scanf("%lld", &x); // Input nilai untuk dimasukkan ke antrian
-            enqueue(x);
-        }
-        else if (type == 2)
-        { // Dequeue: hapus elemen dari antrian
-            dequeue();
-        }
-        else if (type == 3)
-        { // Print front: cetak elemen depan antrian
-            printFront();
-        }
+    solve(arr, query, result, n, q); // Memanggil fungsi solve untuk memecahkan masalah
+
+    for (int i = 0; i < q; i++)
+    {
+        printf("%d\n", result[i]); // Menampilkan nilai result pada indeks i
     }
 
     return 0;

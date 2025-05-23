@@ -3,23 +3,28 @@
 <pre>
 <strong>NAMA         :</strong> ADIN RAFI FAHREZI
 <strong>NIM          :</strong> 121241056
-<strong>Problem Link :</strong> <a href="https://www.hackerrank.com/challenges/queue-using-two-stacks/problem?isFullScreen=true">Queue using Two Stacks - HackerRank</a>
-<strong>Difficulty   :</strong> Medium
+<strong>Problem Link :</strong> <a href="https://www.hackerrank.com/challenges/queries-with-fixed-length/problem?isFullScreen=true">Queries with Fixed Length - HackerRank</a>
+<strong>Difficulty   :</strong> Hard
 </pre>
 
 ## Short Approach Summary
 
-Untuk membangun struktur data `queue (FIFO)`menggunakan dua `stack (LIFO)`, pendekatannya adalah sebagai berikut:
+Untuk setiap query `d`, gunakan teknik Sliding Window Maximum untuk mencari nilai maksimum pada setiap subarray sepanjang `d`. Gunakan deque (menyimpan indeks) agar proses ini berjalan dalam `O(n)`:
 
-1. `stack1` digunakan untuk operasi `enqueue`, yaitu menambahkan elemen ke dalam queue.
-2. `stack2` digunakan untuk operasi `dequeue` dan `peek` (melihat elemen depan).
-3. Jika `stack2` kosong, pindahkan semua elemen dari `stack1` ke `stack2`.
+1. Iterasi array dari kiri ke kanan.
 
-<p align="left">Proses pemindahan ini membalik urutan elemen dan memastikan elemen yang pertama kali masuk akan keluar lebih dulu, sesuai dengan prinsip <strong>FIFO (First In, First Out)</strong>.</p>
+2. Hapus elemen dari belakang deque jika lebih kecil dari elemen saat ini (agar deque tetap menurun).
 
-### Efisiensi Waktu
+3. Hapus elemen dari depan deque jika sudah keluar dari subarray saat ini.
 
-- **Enqueue**: O(1) <br>
-  Operasi ini hanya menambahkan elemen ke dalam `stack1`, yang merupakan operasi konstan.
-- **Dequeue / Peek**: **Amortized O(1)** <br>
-  Meskipun kadang perlu memindahkan elemen dari `stack1` ke `stack2`, `setiap elemen hanya dipindahkan sekali`, sehingga waktu rata-rata per operasi tetap `O(1)`.
+4. Nilai maksimum subarray adalah elemen di depan deque.
+
+5. Simpan semua nilai maksimum dari subarray tersebut, lalu ambil nilai minimum dari semuanya sebagai jawaban untuk query tersebut.
+
+Lakukan langkah di atas untuk setiap query `d`.
+
+Kompleksitas:
+
+- Per query: `O(n)`
+
+- Total: `O(q × n)` (aman karena `q ≤ 100`, `n ≤ 10⁵`)
