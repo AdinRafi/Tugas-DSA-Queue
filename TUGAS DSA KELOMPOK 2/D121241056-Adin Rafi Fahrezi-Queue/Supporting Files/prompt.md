@@ -65,7 +65,7 @@ Dan mengembalikan:
 ### Batasan
 
 - 1 ≤ n ≤ 10⁵
-- 0 ≤ arr[i] ≤ 10⁶
+- 0 ≤ arr[i] < 10⁶
 - 1 ≤ q ≤ 100
 - 1 ≤ d ≤ n
 
