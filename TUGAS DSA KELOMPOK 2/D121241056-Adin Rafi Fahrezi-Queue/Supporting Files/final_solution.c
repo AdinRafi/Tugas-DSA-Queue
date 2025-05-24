@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 /*
 ------------------------------------------------------
 Program: Minimum dari Maksimum Subarray
@@ -21,6 +19,8 @@ Langkah-langkah utama:
 
 ------------------------------------------------------
 */
+
+#include <stdio.h>
 
 #define MAKS_N 100000      // Batas n dan panjang subarray (1 ≤ n ≤ 100.000 dan 1 ≤ d ≤ n)
 #define MAKS_Q 100         // Batas jumlah pertanyaan (1 ≤ q ≤ 100)
