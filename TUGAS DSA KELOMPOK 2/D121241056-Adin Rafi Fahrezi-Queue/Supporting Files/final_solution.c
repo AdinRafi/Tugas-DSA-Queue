@@ -81,7 +81,7 @@ int cariMinimumDariSemuaMaksimumSubarray(int data[], int jumlahData, int ukuranS
     for (int i = 0; i < jumlahData; i++)
     {
         // 1. Hapus indeks dari depan jika keluar dari window
-        if (!dequeKosong(indeksDepan, indeksBelakang) && lihatDepan(deque, indeksDepan) <= i - ukuranSubarray)
+        if (!dequeKosong(indeksDepan, indeksBelakang) && lihatDepan(deque, indeksDepan) == i - ukuranSubarray)
         {
             dequeueDepan(&indeksDepan);
         }
