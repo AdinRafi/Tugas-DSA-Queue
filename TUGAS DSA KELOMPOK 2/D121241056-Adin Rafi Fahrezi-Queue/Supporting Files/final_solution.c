@@ -1,18 +1,30 @@
 #include <stdio.h>
 
-/*Dokumentasi Program
+/*
+------------------------------------------------------
+Program: Minimum dari Maksimum Subarray
+------------------------------------------------------
 
-Fungsi Program
-Mencari nilai minimum dari maksimum subarray sesuai ukuran subarray(query[q]) dengan sistem window
-menggunakan deque sebagai indeks dari data(arrr[i]) yang memiliki 4 operasi dasar:
-1. Memajukan indeks depan deque jika melewati ukuran subarray
-2. Menghapus elemen dari indeks belakang deque jika isi elemen kurang dari elemen saat ini
-3. Mencari nilai maksimum dari subarray
-4. Mencari nilai minimum dari semua maksimum subarray*/
+Deskripsi:
+Program ini mencari nilai minimum dari nilai maksimum
+semua subarray dengan panjang tertentu (diberikan dalam query).
 
-#define MAKS_N 100000      // Batas n dan query[q] (1 ≤ n ≤ 10⁵ dan 1 ≤ d ≤ n)
-#define MAKS_Q 100         // Batas q (1 ≤ q ≤ 100)
-#define MAKS_NILAI 1000000 // Batas arr[1] + 1 (0 ≤ arr[i] < 10⁶)
+Metode:
+- Menggunakan teknik "Sliding Window Maximum" dengan bantuan deque.
+- Deque menyimpan indeks dari elemen dalam subarray saat ini.
+
+Langkah-langkah utama:
+1. Menghapus elemen dari depan deque jika sudah keluar dari window (subarray).
+2. Menghapus elemen dari belakang deque jika nilainya lebih kecil dari elemen saat ini.
+3. Elemen di depan deque selalu menjadi indeks dari nilai maksimum saat ini.
+4. Menyimpan nilai maksimum dari subarray, lalu mencari nilai minimum dari semua maksimum tersebut.
+
+------------------------------------------------------
+*/
+
+#define MAKS_N 100000      // Batas n dan panjang subarray (1 ≤ n ≤ 100.000 dan 1 ≤ d ≤ n)
+#define MAKS_Q 100         // Batas jumlah pertanyaan (1 ≤ q ≤ 100)
+#define MAKS_NILAI 1000000 // Nilai maksimum elemen arr[i] (0 ≤ arr[i] < 1.000.000)
 
 void bacaArray(int array[], int jumlah)
 {
@@ -22,9 +34,40 @@ void bacaArray(int array[], int jumlah)
     }
 }
 
-int dequeKosong(int deque[], int indeksDepan, int indeksBelakang)
+// Cek apakah deque kosong
+int dequeKosong(int indeksDepan, int indeksBelakang)
 {
     return indeksDepan > indeksBelakang;
+}
+
+// Tambah elemen ke belakang deque
+void enqueue(int deque[], int *indeksBelakang, int nilai)
+{
+    deque[++(*indeksBelakang)] = nilai;
+}
+
+// Hapus elemen dari depan deque
+void dequeueDepan(int *indeksDepan)
+{
+    (*indeksDepan)++;
+}
+
+// Hapus elemen dari belakang deque
+void dequeueBelakang(int *indeksBelakang)
+{
+    (*indeksBelakang)--;
+}
+
+// Ambil elemen depan deque (tanpa menghapus)
+int lihatDepan(int deque[], int indeksDepan)
+{
+    return deque[indeksDepan];
+}
+
+// Ambil elemen belakang deque (tanpa menghapus)
+int lihatBelakang(int deque[], int indeksBelakang)
+{
+    return deque[indeksBelakang];
 }
 
 int cariMinimumDariSemuaMaksimumSubarray(int data[], int jumlahData, int ukuranSubarray)
@@ -37,21 +80,25 @@ int cariMinimumDariSemuaMaksimumSubarray(int data[], int jumlahData, int ukuranS
 
     for (int i = 0; i < jumlahData; i++)
     {
-        if (!dequeKosong(deque, indeksDepan, indeksBelakang) && deque[indeksDepan] <= i - ukuranSubarray)
+        // 1. Hapus indeks dari depan jika keluar dari window
+        if (!dequeKosong(indeksDepan, indeksBelakang) && lihatDepan(deque, indeksDepan) <= i - ukuranSubarray)
         {
-            indeksDepan++;
+            dequeueDepan(&indeksDepan);
         }
 
-        while (!dequeKosong(deque, indeksDepan, indeksBelakang) && data[i] >= data[deque[indeksBelakang]])
+        // 2. Hapus semua elemen dari belakang yang lebih kecil dari elemen saat ini
+        while (!dequeKosong(indeksDepan, indeksBelakang) && data[i] >= data[lihatBelakang(deque, indeksBelakang)])
         {
-            indeksBelakang--;
+            dequeueBelakang(&indeksBelakang);
         }
 
-        deque[++indeksBelakang] = i;
+        // 3. Tambahkan indeks saat ini ke belakang deque
+        enqueue(deque, &indeksBelakang, i);
 
+        // 4. Jika sudah sampai panjang window, catat nilai maksimum
         if (i >= ukuranSubarray - 1)
         {
-            int nilaiMaksimum = data[deque[indeksDepan]];
+            int nilaiMaksimum = data[lihatDepan(deque, indeksDepan)];
             if (nilaiMaksimum < hasilMinimum)
             {
                 hasilMinimum = nilaiMaksimum;
