@@ -12,7 +12,7 @@ Metode:
 - Deque menyimpan indeks dari elemen dalam subarray saat ini.
 
 Langkah-langkah utama:
-1. Menghapus elemen dari depan deque jika sudah keluar dari window (subarray).
+1. Menghapus elemen dari depan deque jika sudah keluar dari window (subarray).s
 2. Menghapus elemen dari belakang deque jika nilainya lebih kecil dari elemen saat ini.
 3. Elemen di depan deque selalu menjadi indeks dari nilai maksimum saat ini.
 4. Menyimpan nilai maksimum dari subarray, lalu mencari nilai minimum dari semua maksimum tersebut.
@@ -25,14 +25,6 @@ Langkah-langkah utama:
 #define MAKS_N 100000      // Batas n dan panjang subarray (1 ≤ n ≤ 100.000 dan 1 ≤ d ≤ n)
 #define MAKS_Q 100         // Batas jumlah kueri (1 ≤ q ≤ 100)
 #define MAKS_NILAI 1000000 // Nilai maksimum elemen arr[i] (0 ≤ arr[i] < 1.000.000)
-
-void bacaArray(int array[], int jumlah)
-{
-    for (int i = 0; i < jumlah; i++)
-    {
-        scanf("%d", &array[i]);
-    }
-}
 
 // Cek apakah deque kosong
 int dequeKosong(int indeksDepan, int indeksBelakang)
@@ -114,6 +106,14 @@ void prosesSemuaKueri(int data[], int jumlahData, int listUkuranSubarray[], int 
     for (int i = 0; i < jumlahKueri; i++)
     {
         hasil[i] = cariMinimumDariSemuaMaksimumSubarray(data, jumlahData, listUkuranSubarray[i]);
+    }
+}
+
+void bacaArray(int array[], int jumlah)
+{
+    for (int i = 0; i < jumlah; i++)
+    {
+        scanf("%d", &array[i]);
     }
 }
 
