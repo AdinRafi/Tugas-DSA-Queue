@@ -23,7 +23,7 @@ Langkah-langkah utama:
 #include <stdio.h>
 
 #define MAKS_N 100000      // Batas n dan panjang subarray (1 ≤ n ≤ 100.000 dan 1 ≤ d ≤ n)
-#define MAKS_Q 100         // Batas jumlah pertanyaan (1 ≤ q ≤ 100)
+#define MAKS_Q 100         // Batas jumlah kueri (1 ≤ q ≤ 100)
 #define MAKS_NILAI 1000000 // Nilai maksimum elemen arr[i] (0 ≤ arr[i] < 1.000.000)
 
 void bacaArray(int array[], int jumlah)
