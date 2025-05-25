@@ -109,7 +109,7 @@ int cariMinimumDariSemuaMaksimumSubarray(int data[], int jumlahData, int ukuranS
     return hasilMinimum;
 }
 
-void prosesSemuaPertanyaan(int data[], int jumlahData, int listUkuranSubarray[], int jumlahKueri, int hasil[])
+void prosesSemuaKueri(int data[], int jumlahData, int listUkuranSubarray[], int jumlahKueri, int hasil[])
 {
     for (int i = 0; i < jumlahKueri; i++)
     {
@@ -138,7 +138,7 @@ int main()
     bacaArray(data, jumlahData);
     bacaArray(listUkuranSubarray, jumlahKueri);
 
-    prosesSemuaPertanyaan(data, jumlahData, listUkuranSubarray, jumlahKueri, hasil);
+    prosesSemuaKueri(data, jumlahData, listUkuranSubarray, jumlahKueri, hasil);
 
     cetakHasil(hasil, jumlahKueri);
 
