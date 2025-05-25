@@ -2,7 +2,7 @@
 
 <pre>
 <strong>NAMA         :</strong> ADIN RAFI FAHREZI
-<strong>NIM          :</strong> 121241056
+<strong>NIM          :</strong> D121241056
 <strong>Problem Link :</strong> <a href="https://www.hackerrank.com/challenges/queries-with-fixed-length/problem?isFullScreen=true">Queries with Fixed Length - HackerRank</a>
 <strong>Difficulty   :</strong> Hard
 </pre>
