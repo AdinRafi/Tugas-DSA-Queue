@@ -71,7 +71,7 @@ Dan mengembalikan:
 
 ### Contoh Masukan 0
 
-| **STDIN**      | **Meaning**                                 |
+| **STDIN**      | **MEANING**                                 |
 | -------------- | ------------------------------------------- |
 | 5 5            | n = 5 (jumlah elemen), q = 5 (jumlah kueri) |
 | 33 11 44 11 55 | elemen-elemen dari `arr`                    |
